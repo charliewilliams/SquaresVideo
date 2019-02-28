@@ -3,16 +3,17 @@ Squares video
  */
 import processing.sound.*;
 
-boolean renderVideo = false;
+boolean renderVideo = true;
 
 int debugOffsetMillis = 0;
+//int debugOffsetMillis = 110000;
 int _frameRate = 30;
 int totalFrames;
 int prerollMillis = renderVideo ? 10000 : 0;
 int audioMillisPreroll = 0;
 
-int notesPerLine = 16;
-int rows = 64; // debug temp
+int notesPerLine = 32;
+int rows = 32;
 float colWidth, rowHeight;
 
 int idx = 0;
@@ -28,7 +29,6 @@ void setup() {
 
   song = new Song("05.json");
   file = new SoundFile(this, "05.wav");
-  file.loop(0);
 
   if (renderVideo) {
     float offsetSecs = (prerollMillis * 2 + audioMillisPreroll) / 1000;
@@ -59,7 +59,7 @@ void draw() {
   int millis = _millis();
 
   if (millis > prerollMillis && file != null && file.isPlaying() == false) {
-    file.jump((debugOffsetMillis + audioMillisPreroll) / 1000.0);
+    //file.jump((debugOffsetMillis + audioMillisPreroll) / 1000.0);
     file.play();
   }
 
@@ -86,9 +86,15 @@ void draw() {
     stroke(hue, sat, 100, 100);
     //noStroke();
     rect(x, y, colWidth, rowHeight);
-    
+
     //text(noteNameFromNumber(n.pitch), x + colWidth / 2, y);
 
     idx++;
+  }
+  
+  saveFrame("output/#####.png");
+  
+  if (frameCount > totalFrames) {
+    exit();
   }
 }
