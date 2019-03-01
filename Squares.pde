@@ -56,6 +56,10 @@ void setup() {
 
 void draw() {
 
+  if (frameCount > totalFrames) {
+    exit();
+  }
+
   int millis = _millis();
 
   if (millis > prerollMillis && file != null && file.isPlaying() == false) {
@@ -67,6 +71,7 @@ void draw() {
   ArrayList<Note> notes = song.readNotes(millis);
 
   if (notes == null || notes.isEmpty()) {
+    saveFrame("output/#####.png");
     return;
   }
 
@@ -91,10 +96,6 @@ void draw() {
 
     idx++;
   }
-  
+
   saveFrame("output/#####.png");
-  
-  if (frameCount > totalFrames) {
-    exit();
-  }
 }

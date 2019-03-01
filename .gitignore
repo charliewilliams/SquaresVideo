@@ -1,2 +1,6 @@
 *.wav
 *.mp3
+output/*
+*.png
+*.m4v
+*.mov
