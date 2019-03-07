@@ -45,11 +45,11 @@ void setup() {
   stroke(0, 0, 100, 100);
   strokeWeight(1);
 
-  for (int x = 0; x < notesPerLine; x++) {
+  for (int x = 0; x <= notesPerLine; x++) {
     line(x * colWidth, 0, x * colWidth, height);
   }
 
-  for (int y = 0; y < rows; y++) {
+  for (int y = 0; y <= rows; y++) {
     line(0, y * rowHeight, width, y * rowHeight);
   }
 }
@@ -62,7 +62,7 @@ void draw() {
 
   int millis = _millis();
 
-  if (millis > prerollMillis && file != null && file.isPlaying() == false) {
+  if (!renderVideo && millis > prerollMillis && file != null && file.isPlaying() == false) {
     //file.jump((debugOffsetMillis + audioMillisPreroll) / 1000.0);
     file.play();
   }
